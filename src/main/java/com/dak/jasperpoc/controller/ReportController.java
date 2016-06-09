@@ -57,10 +57,10 @@ public class ReportController {
 	//	IOUtils.closeQuietly(jasperStream);
 		
 		Map<String,Object> params = new HashMap<>();
-		JasperPrint jp = JasperFillManager.fillReport(jasperReport, params, new JRBeanCollectionDataSource(employeeRepository.findAll()));
+		//JasperPrint jp = JasperFillManager.fillReport(jasperReport, params, new JRBeanCollectionDataSource(employeeRepository.findAll()));
 		
 		//JasperPrint jp = JasperFillManager.fillReport(jasperReport, params, new JRBeanCollectionDataSource(new ArrayList<>()));
-		//JasperPrint jp = JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());
+		JasperPrint jp = JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());
 
 		reportService.writePdfReport(jp, response, "employeeReport");
 		return;
