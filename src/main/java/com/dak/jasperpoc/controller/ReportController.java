@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dak.jasperpoc.model.Employee;
-import com.dak.jasperpoc.reports.EmployeeReport;
 import com.dak.jasperpoc.repository.EmployeeRepository;
 import com.dak.jasperpoc.service.ReportService;
 
@@ -33,7 +32,7 @@ public class ReportController {
 		this.employeeRepository = employeeRepository;
 		this.reportService = reportService;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String getHome(){
 		return "redirect:/employeeReport.pdf";
@@ -41,17 +40,21 @@ public class ReportController {
 
 	@RequestMapping(value = "/employeeReport.pdf", method = RequestMethod.GET, produces = "application/pdf")
 	public void getEmployeeReportPdf(final HttpServletResponse response) throws JRException, IOException, ClassNotFoundException {
-		EmployeeReport report = new EmployeeReport(employeeRepository.findAll());
-		JasperPrint jp = report.getReport();
+		//EmployeeReport report = new EmployeeReport(employeeRepository.findAll());
+		//	JasperPrint jp = report.getReport();
+
+		JasperPrint jp = null;
 
 		reportService.writePdfReport(jp, response, "employeeReport");
 		return;
 	}
-	
+
 	@RequestMapping(value = "/employeeReport.xlsx", method = RequestMethod.GET, produces = "application/pdf")
 	public void getEmployeeReportXlsx(final HttpServletResponse response) throws JRException, IOException, ClassNotFoundException {
-		EmployeeReport report = new EmployeeReport(employeeRepository.findAll());
-		JasperPrint jp = report.getReport();
+		//EmployeeReport report = new EmployeeReport(employeeRepository.findAll());
+		//JasperPrint jp = report.getReport();
+
+		JasperPrint jp = null;
 
 		reportService.writeXlsxReport(jp, response, "employeeReport");
 		return;
